@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 # Baca dataset
 df = pd.read_csv('D:\Pythonnn\Bangkit\PRSA_Data_Dongsi_20130301-20170228_baru.csv')
@@ -19,7 +20,7 @@ filtered_data.set_index('tanggal', inplace=True)
 monthly_avg = filtered_data['PM2.5'].resample('M').mean()
 
 # Streamlit App
-st.title('Dashboard Analisis Data Udara')
+st.title('Dashboard Analisis Data Udara di Dongsi')
 
 # Tampilkan beberapa baris data
 st.write('Data Udara:')
@@ -28,7 +29,7 @@ st.dataframe(df.head())
 # Visualisasi rata-rata PM2.5 per bulan
 st.write('Rata-rata PM2.5 per Bulan:')
 fig, ax = plt.subplots(figsize=(14, 8))
-sns.lineplot(x=monthly_avg.index, y=monthly_avg, label='PM2.5', color='blue', marker='o')
+sns.lineplot(x=monthly_avg.index.strftime('%Y-%m'), y=monthly_avg.values, label='PM2.5', color='blue', marker='o')
 plt.title('Tren Keseluruhan Tingkat Rata-rata Bulanan PM2.5 (Februari 2016 - Februari 2017)', fontsize=16)
 plt.xlabel('Tanggal', fontsize=12)
 plt.ylabel('Rata-rata Tingkat PM2.5', fontsize=12)
@@ -48,7 +49,7 @@ st.title('Dashboard Analisis Data Suhu')
 # Visualisasi rata-rata suhu per bulan
 st.write('Rata-rata Suhu per Bulan:')
 fig, ax = plt.subplots(figsize=(12, 6))
-sns.lineplot(x=monthly_avg_temp.index, y=monthly_avg_temp.values, color='orange', marker='o')
+sns.lineplot(x=monthly_avg_temp.index.strftime('%Y-%m'), y=monthly_avg_temp.values, color='orange', marker='o')
 plt.title('Rata-rata Bulanan Perubahan Suhu dari Februari 2016 hingga Februari 2017')
 plt.xlabel('Tanggal')
 plt.ylabel('Suhu (TEMP)')
