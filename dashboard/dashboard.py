@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 
 # Baca dataset
 df = pd.read_csv('D:\Pythonnn\Bangkit\PRSA_Data_Dongsi_20130301-20170228_baru.csv')
@@ -36,10 +35,10 @@ plt.ylabel('Rata-rata Tingkat PM2.5', fontsize=12)
 plt.legend()
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.xticks(rotation=45)  # Menambahkan rotasi pada label tanggal untuk keterbacaan
+
+# Instead of st.pyplot, use st.pyplot(fig) to display the plot in Streamlit
 st.pyplot(fig)
 
-
-#----
 # Resampling data untuk mendapatkan rata-rata bulanan hanya untuk kolom 'TEMP'
 monthly_avg_temp = filtered_data['TEMP'].resample('M').mean()
 
@@ -56,9 +55,10 @@ plt.ylabel('Suhu (TEMP)')
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.yticks(range(0, int(max(monthly_avg_temp.values)) + 2, 2))
 plt.xticks(rotation=45)  # Menambahkan rotasi pada label tanggal untuk keterbacaan
+
+# Display the temperature plot
 st.pyplot(fig)
 
-#---
 # Menghitung korelasi antara variabel
 correlation_matrix = df[['PM2.5', 'TEMP', 'DEWP']].corr()
 
@@ -76,9 +76,10 @@ sns.scatterplot(x='TEMP', y='PM2.5', data=df, alpha=0.5, color='green')  # Mengg
 plt.title('Scatter Plot antara Suhu dan Tingkat PM2.5')
 plt.xlabel('Suhu (TEMP)')
 plt.ylabel('Tingkat PM2.5')
+
+# Display the scatter plot for temperature and PM2.5
 st.pyplot(fig)
 
-#--
 # Streamlit App
 st.title('Scatter Plot antara Kelembaban dan Tingkat PM2.5')
 
@@ -88,4 +89,6 @@ sns.scatterplot(x='DEWP', y='PM2.5', data=df, alpha=0.5, color='purple')  # Gant
 plt.title('Scatter Plot antara Kelembaban dan Tingkat PM2.5')
 plt.xlabel('Kelembaban (DEWP)')
 plt.ylabel('Tingkat PM2.5')
+
+# Display the scatter plot for humidity and PM2.5
 st.pyplot(fig)
