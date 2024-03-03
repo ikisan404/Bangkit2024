@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Baca dataset
-df = pd.read_csv('dashboard/PRSA_Data_Dongsi_20130301-20170228_baru.csv')
+df = pd.read_csv('Bangkit\PRSA_Data_Dongsi_20130301-20170228_baru.csv')
 
 # Melakukan filter untuk mengubah tipe menjadi datetime
 df['tanggal'] = pd.to_datetime(df[['year', 'month', 'day']])
